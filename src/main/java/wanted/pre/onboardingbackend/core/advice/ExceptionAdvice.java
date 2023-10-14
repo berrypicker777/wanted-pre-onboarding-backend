@@ -3,11 +3,13 @@ package wanted.pre.onboardingbackend.core.advice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import wanted.pre.onboardingbackend.core.exception.Exception400;
 import wanted.pre.onboardingbackend.core.exception.Exception404;
 import wanted.pre.onboardingbackend.core.exception.Exception500;
 import wanted.pre.onboardingbackend.dto.ResponseDTO;
 
+@RestControllerAdvice
 public class ExceptionAdvice {
 
     @ExceptionHandler(Exception400.class)

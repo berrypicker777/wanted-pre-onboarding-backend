@@ -17,7 +17,7 @@ public class ApplicationController {
     /**
      * 채용 공고 지원하기
      */
-    @PostMapping("/application")
+    @PostMapping("/applications")
     public ResponseDTO addApplication(@RequestBody ApplicationRequest.AddDTO addDTO) {
         applicationService.addApplication(addDTO);
 

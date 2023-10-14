@@ -18,6 +18,7 @@ public class RecruitmentService {
     private final RecruitmentRepository recruitmentRepository;
     private final HistoryRepository historyRepository;
 
+    @Transactional
     public void addRecruitment(RecruitmentRequest.AddDTO addDTO) {
         Company companyPS = companyRepository.findById(addDTO.getCompanyId()).orElseThrow(
                 () -> new Exception404("해당 회사가 존재하지 않습니다.")
@@ -37,5 +38,18 @@ public class RecruitmentService {
         );
 
         recruitmentPS.update(updateDTO);
+    }
+
+    @Transactional
+    public void deleteRecruitment(Long id) {
+        recruitmentRepository.findById(id).orElseThrow(
+                () -> new Exception404("해당 채용공고가 존재하지 않습니다.")
+        );
+
+        try {
+            recruitmentRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new Exception500(e.getMessage());
+        }
     }
 }

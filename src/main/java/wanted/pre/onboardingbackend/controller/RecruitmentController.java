@@ -25,4 +25,11 @@ public class RecruitmentController {
 
         return new ResponseDTO<>();
     }
+
+    @DeleteMapping("/recruitements/{id}")
+    public ResponseDTO updateRecruitment(@PathVariable Long id) {
+        recruitmentService.deleteRecruitment(id);
+
+        return new ResponseDTO<>();
+    }
 }

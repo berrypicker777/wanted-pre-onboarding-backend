@@ -15,9 +15,9 @@ public class RecruitmentController {
 
     private final RecruitmentService recruitmentService;
 
-    @PostMapping("/company/{companyId}/recruitment")
-    public ResponseDTO addRecruitment(@PathVariable Long companyId, @RequestBody RecruitmentRequest.AddDTO addDTO) {
-        recruitmentService.addRecruitment(companyId, addDTO);
+    @PostMapping("recruitments")
+    public ResponseDTO addRecruitment(@RequestBody RecruitmentRequest.AddDTO addDTO) {
+        recruitmentService.addRecruitment(addDTO);
 
         return new ResponseDTO<>();
     }

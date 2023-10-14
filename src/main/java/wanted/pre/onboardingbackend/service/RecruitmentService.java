@@ -9,6 +9,7 @@ import wanted.pre.onboardingbackend.model.*;
 @RequiredArgsConstructor
 @Service
 public class RecruitmentService {
+
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
     private final RecruitmentRepository recruitmentRepository;

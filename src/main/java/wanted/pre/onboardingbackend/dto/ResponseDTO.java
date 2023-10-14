@@ -19,11 +19,11 @@ public class ResponseDTO<T> {
     public ResponseDTO(T data) {
         this.status = HttpStatus.OK.value();
         this.msg = "ok";
-        this.data = data; // Response Body
+        this.data = data;
     }
 
     public ResponseDTO(HttpStatus httpStatus, String msg, T data) {
-        this.status = httpStatus.value();
+        this.status = httpStatus.value(); // HTTP 상태 코드
         this.msg = msg; // 에러 제목
         this.data = data; // 에러 내용
     }

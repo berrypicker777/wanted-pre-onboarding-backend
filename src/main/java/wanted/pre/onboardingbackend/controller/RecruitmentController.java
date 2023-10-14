@@ -12,6 +12,7 @@ import wanted.pre.onboardingbackend.service.RecruitmentService;
 @RequiredArgsConstructor
 @RestController
 public class RecruitmentController {
+
     private final RecruitmentService recruitmentService;
 
     @PostMapping("/company/{companyId}/recruitment")

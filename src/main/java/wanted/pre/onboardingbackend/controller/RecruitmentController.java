@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import wanted.pre.onboardingbackend.dto.ResponseDTO;
 import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentRequest;
+import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentResponse;
 import wanted.pre.onboardingbackend.service.RecruitmentService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,10 +29,16 @@ public class RecruitmentController {
         return new ResponseDTO<>();
     }
 
-    @DeleteMapping("/recruitements/{id}")
+    @DeleteMapping("/recruitments/{id}")
     public ResponseDTO updateRecruitment(@PathVariable Long id) {
         recruitmentService.deleteRecruitment(id);
 
         return new ResponseDTO<>();
     }
+
+    @GetMapping("/recruitments")
+    public ResponseDTO<List<RecruitmentResponse.ListDTO>> getRecruitments() {
+        return new ResponseDTO<>(recruitmentService.getRecruitments());
+    }
+
 }

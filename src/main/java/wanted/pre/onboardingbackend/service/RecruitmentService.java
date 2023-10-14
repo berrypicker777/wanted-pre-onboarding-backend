@@ -6,7 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import wanted.pre.onboardingbackend.core.exception.Exception404;
 import wanted.pre.onboardingbackend.core.exception.Exception500;
 import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentRequest;
+import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentResponse;
 import wanted.pre.onboardingbackend.model.*;
+
+import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -51,5 +54,9 @@ public class RecruitmentService {
         } catch (Exception e) {
             throw new Exception500(e.getMessage());
         }
+    }
+
+    public List<RecruitmentResponse.ListDTO> getRecruitments() {
+        return recruitmentRepository.findRecruitments();
     }
 }

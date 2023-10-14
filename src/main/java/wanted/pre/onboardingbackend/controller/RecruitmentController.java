@@ -1,5 +1,6 @@
 package wanted.pre.onboardingbackend.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import wanted.pre.onboardingbackend.dto.ResponseDTO;
@@ -43,5 +44,10 @@ public class RecruitmentController {
         } else {
             return new ResponseDTO<>(recruitmentService.searchRecruitments(search));
         }
+    }
+
+    @GetMapping("/recruitments/{id}")
+    public ResponseDTO<RecruitmentResponse.DetailDTO> getRecruitment(@PathVariable Long id) {
+        return new ResponseDTO<>(recruitmentService.getRecruitment(id));
     }
 }

@@ -22,4 +22,9 @@ public interface RecruitmentRepository extends JpaRepository<Recruitment, Long> 
             "or r.content like concat('%', :search, '%') " +
             "or r.techStack like concat('%', :search, '%')")
     List<RecruitmentResponse.ListDTO> searchRecruitments(@Param("search") String search);
+
+    @Query("select r.id " +
+            "from Recruitment r " +
+            "where r.id = :companyId")
+    List<Long> findByCompanyId(@Param("companyId") Long id);
 }

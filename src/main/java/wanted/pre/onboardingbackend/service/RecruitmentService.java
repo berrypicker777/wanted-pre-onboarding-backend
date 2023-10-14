@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.pre.onboardingbackend.core.exception.Exception404;
-import wanted.pre.onboardingbackend.core.exception.Exception500;
 import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentRequest;
 import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentResponse;
 import wanted.pre.onboardingbackend.model.*;
@@ -27,11 +26,7 @@ public class RecruitmentService {
                 () -> new Exception404("해당 회사가 존재하지 않습니다.")
         );
 
-        try {
-            recruitmentRepository.save(addDTO.toEntity(companyPS));
-        } catch (Exception e) {
-            throw new Exception500(e.getMessage());
-        }
+        recruitmentRepository.save(addDTO.toEntity(companyPS));
     }
 
     @Transactional
@@ -49,11 +44,7 @@ public class RecruitmentService {
                 () -> new Exception404("해당 채용공고가 존재하지 않습니다.")
         );
 
-        try {
-            recruitmentRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception500(e.getMessage());
-        }
+        recruitmentRepository.deleteById(id);
     }
 
     public List<RecruitmentResponse.ListDTO> getRecruitments() {
@@ -62,5 +53,19 @@ public class RecruitmentService {
 
     public List<RecruitmentResponse.ListDTO> searchRecruitments(String search) {
         return recruitmentRepository.searchRecruitments(search);
+    }
+
+    public RecruitmentResponse.DetailDTO getRecruitment(Long id) {
+        Recruitment recruitmentPS = recruitmentRepository.findById(id).orElseThrow(
+                () -> new Exception404("해당 채용공고가 존재하지 않습니다.")
+        );
+
+        Company companyPS = companyRepository.findById(recruitmentPS.getCompany().getId()).orElseThrow(
+                () -> new Exception404("해당 회사가 존재하지 않습니다.")
+        );
+
+        List<Long> recruitmentIdList = recruitmentRepository.findByCompanyId(companyPS.getId());
+
+        return new RecruitmentResponse.DetailDTO(recruitmentPS, companyPS, recruitmentIdList);
     }
 }

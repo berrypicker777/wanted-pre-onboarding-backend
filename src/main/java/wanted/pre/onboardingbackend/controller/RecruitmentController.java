@@ -37,8 +37,11 @@ public class RecruitmentController {
     }
 
     @GetMapping("/recruitments")
-    public ResponseDTO<List<RecruitmentResponse.ListDTO>> getRecruitments() {
-        return new ResponseDTO<>(recruitmentService.getRecruitments());
+    public ResponseDTO<List<RecruitmentResponse.ListDTO>> getRecruitments(@RequestParam(required = false) String search) {
+        if (search.isBlank()) {
+            return new ResponseDTO<>(recruitmentService.getRecruitments());
+        } else {
+            return new ResponseDTO<>(recruitmentService.searchRecruitments(search));
+        }
     }
-
 }

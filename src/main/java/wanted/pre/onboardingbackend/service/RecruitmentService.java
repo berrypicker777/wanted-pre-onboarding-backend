@@ -59,4 +59,8 @@ public class RecruitmentService {
     public List<RecruitmentResponse.ListDTO> getRecruitments() {
         return recruitmentRepository.findRecruitments();
     }
+
+    public List<RecruitmentResponse.ListDTO> searchRecruitments(String search) {
+        return recruitmentRepository.searchRecruitments(search);
+    }
 }

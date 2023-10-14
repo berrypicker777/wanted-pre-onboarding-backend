@@ -13,20 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "company_tb")
 @Entity
-public class Company {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 30)
-    private String name; // 회사명
-
-    @Column(nullable = false, length = 10)
-    private String nation; // 국가
-
-    @Column(nullable = false, length = 10)
-    private String legion; // 지역
+    @Column(nullable = false, length = 20)
+    private String name; // 이름
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

@@ -30,4 +30,12 @@ public class RecruitmentService {
         }
     }
 
+    @Transactional
+    public void updateRecruitment(Long id, RecruitmentRequest.UpdateDTO updateDTO) {
+        Recruitment recruitmentPS = recruitmentRepository.findById(id).orElseThrow(
+                () -> new Exception404("해당 채용공고가 존재하지 않습니다.")
+        );
+
+        recruitmentPS.update(updateDTO);
+    }
 }

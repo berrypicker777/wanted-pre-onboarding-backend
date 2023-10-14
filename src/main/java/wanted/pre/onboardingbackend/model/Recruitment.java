@@ -1,9 +1,7 @@
 package wanted.pre.onboardingbackend.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentRequest;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "recruitment_tb")
+@Getter
 @Entity
 public class Recruitment {
 
@@ -47,5 +46,12 @@ public class Recruitment {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void update(RecruitmentRequest.UpdateDTO updateDTO) {
+        this.position = updateDTO.getPosition();
+        this.signingBonus = updateDTO.getSigningBonus();
+        this.techStack = updateDTO.getTechStack();
+        this.content = updateDTO.getContent();
     }
 }

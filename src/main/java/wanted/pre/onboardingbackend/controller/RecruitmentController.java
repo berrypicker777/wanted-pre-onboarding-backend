@@ -1,10 +1,7 @@
 package wanted.pre.onboardingbackend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wanted.pre.onboardingbackend.dto.ResponseDTO;
 import wanted.pre.onboardingbackend.dto.recruitment.RecruitmentRequest;
 import wanted.pre.onboardingbackend.service.RecruitmentService;
@@ -18,6 +15,13 @@ public class RecruitmentController {
     @PostMapping("/recruitments")
     public ResponseDTO addRecruitment(@RequestBody RecruitmentRequest.AddDTO addDTO) {
         recruitmentService.addRecruitment(addDTO);
+
+        return new ResponseDTO<>();
+    }
+
+    @PatchMapping("/recruitments/{id}")
+    public ResponseDTO updateRecruitment(@PathVariable Long id, @RequestBody RecruitmentRequest.UpdateDTO updateDTO) {
+        recruitmentService.updateRecruitment(id, updateDTO);
 
         return new ResponseDTO<>();
     }

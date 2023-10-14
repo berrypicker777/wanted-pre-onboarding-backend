@@ -1,6 +1,5 @@
 package wanted.pre.onboardingbackend.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import wanted.pre.onboardingbackend.dto.ResponseDTO;
@@ -16,6 +15,9 @@ public class RecruitmentController {
 
     private final RecruitmentService recruitmentService;
 
+    /**
+     * 채용 공고 등록하기
+     */
     @PostMapping("/recruitments")
     public ResponseDTO addRecruitment(@RequestBody RecruitmentRequest.AddDTO addDTO) {
         recruitmentService.addRecruitment(addDTO);
@@ -23,6 +25,9 @@ public class RecruitmentController {
         return new ResponseDTO<>();
     }
 
+    /**
+     * 채용 공고 수정하기
+     */
     @PatchMapping("/recruitments/{id}")
     public ResponseDTO updateRecruitment(@PathVariable Long id, @RequestBody RecruitmentRequest.UpdateDTO updateDTO) {
         recruitmentService.updateRecruitment(id, updateDTO);
@@ -30,6 +35,9 @@ public class RecruitmentController {
         return new ResponseDTO<>();
     }
 
+    /**
+     * 채용 공고 삭제하기
+     */
     @DeleteMapping("/recruitments/{id}")
     public ResponseDTO updateRecruitment(@PathVariable Long id) {
         recruitmentService.deleteRecruitment(id);
@@ -37,6 +45,9 @@ public class RecruitmentController {
         return new ResponseDTO<>();
     }
 
+    /**
+     * 채용 공고 목록 조회하기, 채용 공고 검색하기
+     */
     @GetMapping("/recruitments")
     public ResponseDTO<List<RecruitmentResponse.ListDTO>> getRecruitments(@RequestParam(required = false) String search) {
         if (search.isBlank()) {
@@ -46,6 +57,9 @@ public class RecruitmentController {
         }
     }
 
+    /**
+     * 채용 공고 상세 조회하기
+     */
     @GetMapping("/recruitments/{id}")
     public ResponseDTO<RecruitmentResponse.DetailDTO> getRecruitment(@PathVariable Long id) {
         return new ResponseDTO<>(recruitmentService.getRecruitment(id));

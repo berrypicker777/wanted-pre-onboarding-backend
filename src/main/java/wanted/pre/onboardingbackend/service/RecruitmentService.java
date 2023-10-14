@@ -20,6 +20,9 @@ public class RecruitmentService {
     private final RecruitmentRepository recruitmentRepository;
     private final HistoryRepository historyRepository;
 
+    /**
+     * 채용 공고 등록하기
+     */
     @Transactional
     public void addRecruitment(RecruitmentRequest.AddDTO addDTO) {
         Company companyPS = companyRepository.findById(addDTO.getCompanyId()).orElseThrow(
@@ -29,6 +32,9 @@ public class RecruitmentService {
         recruitmentRepository.save(addDTO.toEntity(companyPS));
     }
 
+    /**
+     * 채용 공고 수정하기
+     */
     @Transactional
     public void updateRecruitment(Long id, RecruitmentRequest.UpdateDTO updateDTO) {
         Recruitment recruitmentPS = recruitmentRepository.findById(id).orElseThrow(
@@ -38,6 +44,9 @@ public class RecruitmentService {
         recruitmentPS.update(updateDTO);
     }
 
+    /**
+     * 채용 공고 삭제하기
+     */
     @Transactional
     public void deleteRecruitment(Long id) {
         recruitmentRepository.findById(id).orElseThrow(
@@ -47,14 +56,23 @@ public class RecruitmentService {
         recruitmentRepository.deleteById(id);
     }
 
+    /**
+     * 채용 공고 목록 조회하기
+     */
     public List<RecruitmentResponse.ListDTO> getRecruitments() {
         return recruitmentRepository.findRecruitments();
     }
 
+    /**
+     * 채용 공고 검색하기
+     */
     public List<RecruitmentResponse.ListDTO> searchRecruitments(String search) {
         return recruitmentRepository.searchRecruitments(search);
     }
 
+    /**
+     * 채용 공고 상세 조회하기
+     */
     public RecruitmentResponse.DetailDTO getRecruitment(Long id) {
         Recruitment recruitmentPS = recruitmentRepository.findById(id).orElseThrow(
                 () -> new Exception404("해당 채용공고가 존재하지 않습니다.")

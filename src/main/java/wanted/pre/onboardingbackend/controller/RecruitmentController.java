@@ -15,7 +15,7 @@ public class RecruitmentController {
 
     private final RecruitmentService recruitmentService;
 
-    @PostMapping("recruitments")
+    @PostMapping("/recruitments")
     public ResponseDTO addRecruitment(@RequestBody RecruitmentRequest.AddDTO addDTO) {
         recruitmentService.addRecruitment(addDTO);
 

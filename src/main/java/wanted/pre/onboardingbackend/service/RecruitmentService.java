@@ -16,9 +16,7 @@ import java.util.List;
 public class RecruitmentService {
 
     private final CompanyRepository companyRepository;
-    private final UserRepository userRepository;
     private final RecruitmentRepository recruitmentRepository;
-    private final HistoryRepository historyRepository;
 
     /**
      * 채용 공고 등록하기

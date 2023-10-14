@@ -2,6 +2,8 @@ package wanted.pre.onboardingbackend.dto.recruitment;
 
 import lombok.Getter;
 import lombok.Setter;
+import wanted.pre.onboardingbackend.model.Company;
+import wanted.pre.onboardingbackend.model.Recruitment;
 
 public class RecruitmentRequest {
 
@@ -19,12 +21,14 @@ public class RecruitmentRequest {
 
         private String techStack; // 사용 기술
 
-        public AddDTO(Long companyId, String position, Integer signingBonus, String content, String techStack) {
-            this.companyId = companyId;
-            this.position = position;
-            this.signingBonus = signingBonus;
-            this.content = content;
-            this.techStack = techStack;
+        public Recruitment toEntity(Company company) {
+            return Recruitment.builder()
+                    .company(company)
+                    .position(position)
+                    .signingBonus(signingBonus)
+                    .content(content)
+                    .techStack(techStack)
+                    .build();
         }
     }
 
@@ -40,11 +44,5 @@ public class RecruitmentRequest {
 
         private String techStack; // 사용 기술
 
-        public UpdateDTO(String position, Integer signingBonus, String content, String techStack) {
-            this.position = position;
-            this.signingBonus = signingBonus;
-            this.content = content;
-            this.techStack = techStack;
-        }
     }
 }

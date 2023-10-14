@@ -19,6 +19,9 @@ public class Recruitment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company; // 회사
+
     @Column(nullable = false, length = 30)
     private String position; // 채용 포지션
 
